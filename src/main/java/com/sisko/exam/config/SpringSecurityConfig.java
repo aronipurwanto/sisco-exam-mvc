@@ -18,11 +18,11 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
         http
                 // form login — allow everyone to access the login pages
-//                .formLogin(formLogin -> formLogin
-//                        .loginPage("/login.html")
-//                        .failureUrl("/login-error.html")
-//                        .permitAll()
-//                )
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .failureUrl("/login-error.html")
+                        .permitAll()
+                )
                 // logout — allow everyone to perform logout
                 .logout(logout -> logout
                         .logoutSuccessUrl("/index.html")
