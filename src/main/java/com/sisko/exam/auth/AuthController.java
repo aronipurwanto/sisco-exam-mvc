@@ -1,0 +1,15 @@
+package com.sisko.exam.auth;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class AuthController {
+    @GetMapping("/login")
+    public String login() {
+        String name = "test";
+
+        return "pages/auth/login";
+    }
+
+}

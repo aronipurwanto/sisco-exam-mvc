@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: "sisko-exam-mvc"
+
+server:
+  port: 8084
