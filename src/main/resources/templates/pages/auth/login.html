@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/login}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/login}">
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
@@ -8,18 +8,26 @@
 <!-- Login -->
 <div layout:fragment="content" class="d-flex col-12 col-xl-4 align-items-center authentication-bg p-sm-12 p-6">
   <div class="w-px-400 mx-auto mt-12 pt-5">
-    <h4 class="mb-1">Welcome to Vuexy! 👋</h4>
+    <h4 class="mb-1">Welcome to Sisco! 👋</h4>
     <p class="mb-6">Please sign-in to your account and start the adventure</p>
 
-    <form id="formAuthentication" class="mb-6" action="index.html" method="GET">
+    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+      Invalid username and password.
+    </div>
+    <div th:if="${param.logout}" class="alert alert-success" role="alert">
+      You have been logged out.
+    </div>
+
+    <form id="formAuthentication" class="mb-6" th:action="@{/login}" method="post">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
       <div class="mb-6 form-control-validation">
-        <label for="email" class="form-label">Email or Username</label>
+        <label for="username" class="form-label">Username</label>
         <input
                 type="text"
                 class="form-control"
-                id="email"
-                name="email-username"
-                placeholder="Enter your email or username"
+                id="username"
+                name="username"
+                placeholder="Enter your username"
                 autofocus />
       </div>
       <div class="mb-6 form-password-toggle form-control-validation">
@@ -38,7 +46,7 @@
       <div class="my-8">
         <div class="d-flex justify-content-between">
           <div class="form-check mb-0 ms-2">
-            <input class="form-check-input" type="checkbox" id="remember-me" />
+            <input class="form-check-input" type="checkbox" id="remember-me" name="remember-me" />
             <label class="form-check-label" for="remember-me"> Remember Me </label>
           </div>
           <a href="auth-forgot-password-cover.html">
@@ -46,7 +54,7 @@
           </a>
         </div>
       </div>
-      <button class="btn btn-primary d-grid w-100">Sign in</button>
+      <button type="submit" class="btn btn-primary d-grid w-100">Sign in</button>
     </form>
 
     <p class="text-center">

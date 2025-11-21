@@ -44,4 +44,19 @@ public class AppErrorController implements ErrorController {
         }
         return "errors/under-maintenance";
     }
+
+    @RequestMapping("/403")
+    public String forbidden(){
+        return  "errors/forbidden";
+    }
+
+    @RequestMapping("/401")
+    public String unauthorized(){
+        return "errors/unauthorized";
+    }
+
+    @RequestMapping("/500")
+    public String internalServerError(){
+        return "errors/internal-server-error";
+    }
 }
