@@ -13,23 +13,43 @@ public class StudentController {
         return  "pages/students/index";
     }
 
-    @GetMapping("/connections")
-    public  String connections() {
-        return  "pages/students/connections";
-    }
-
-    @GetMapping("/detail")
-    public String detail(){
-        return "pages/students/detail";
-    }
-
     @GetMapping("/billing")
     public String billing(){
         return "pages/students/billing";
     }
 
+    @GetMapping("/connection")
+    public  String connections() {
+        return "pages/students/connection";
+    }
+
+    @GetMapping("/course")
+    public String course(){
+        return "pages/students/course";
+    }
+
+    @GetMapping("/course/detail")
+    public String courseDetail(){
+        return "pages/students/course-detail";
+    }
+
+    @GetMapping("/profile")
+    public String detail(){
+        return "pages/students/profile";
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard(){
+        return "pages/students/dashboard";
+    }
+
     @GetMapping("/notification")
     public String notification(){
         return "pages/students/notification";
+    }
+
+    @GetMapping("/security")
+    public String security(){
+        return "pages/students/security";
     }
 }

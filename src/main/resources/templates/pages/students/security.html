@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/student}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -17,7 +17,7 @@
                         <div class=" d-flex align-items-center flex-column">
                             <img
                                     class="img-fluid rounded mb-4"
-                                    src="../../assets/img/avatars/1.png"
+                                    th:src="@{~/img/avatars/1.png}"
                                     height="120"
                                     width="120"
                                     alt="User avatar" />

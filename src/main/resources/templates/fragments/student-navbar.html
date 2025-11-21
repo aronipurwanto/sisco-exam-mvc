@@ -1,0 +1,32 @@
+<!-- Navbar pills -->
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="student-navbar" class="row">
+    <div class="col-md-12">
+        <div class="nav-align-top">
+            <ul class="nav nav-pills flex-column flex-sm-row mb-6 gap-sm-0 gap-2">
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{~/students/profile}">
+                        <i class="icon-base ti tabler-user-check icon-sm me-1_5"></i> Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{~/students/teams}">
+                        <i class="icon-base ti tabler-users icon-sm me-1_5"></i> Teams
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{~/students/project}">
+                        <i class="icon-base ti tabler-layout-grid icon-sm me-1_5"></i> Projects
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{~/students/connection}">
+                        <i class="icon-base ti tabler-link icon-sm me-1_5"></i> Connections
+                    </a>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!--/ Navbar pills -->
