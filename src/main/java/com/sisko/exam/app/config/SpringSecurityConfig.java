@@ -3,6 +3,7 @@ package com.sisko.exam.app.config;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sisko.exam.app.model.JsonUser;
+import com.sisko.exam.app.model.JsonUserData;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -24,7 +25,6 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig {
-
     public SpringSecurityConfig() {
         super();
     }
@@ -37,16 +37,16 @@ public class SpringSecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         ObjectMapper objectMapper = new ObjectMapper();
-        TypeReference<List<JsonUser>> typeReference = new TypeReference<>() {};
+        TypeReference<JsonUserData> typeReference = new TypeReference<>() {};
         try {
-            InputStream inputStream = new ClassPathResource("static/json/user.json").getInputStream();
-            List<JsonUser> users = objectMapper.readValue(inputStream, typeReference);
+            InputStream inputStream = new ClassPathResource("static/json/user-list.json").getInputStream();
+            JsonUserData data = objectMapper.readValue(inputStream, typeReference);
             List<UserDetails> userDetailsList = new ArrayList<>();
-            for (JsonUser user : users) {
+            for (JsonUser user : data.getData()) {
                 userDetailsList.add(User.builder()
                         .username(user.getUsername())
                         .password(passwordEncoder.encode(user.getPassword()))
-                        .roles(user.getRole())
+                        .roles(user.getRole().toUpperCase())
                         .build());
             }
             return new InMemoryUserDetailsManager(userDetailsList);
