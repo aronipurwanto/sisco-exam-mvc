@@ -10,7 +10,7 @@ public class StudentController {
 
     @GetMapping
     public  String index() {
-        return  "pages/students/index";
+        return  "redirect:/students/dashboard";
     }
 
     @GetMapping("/billing")

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "username": "user.admin",
+    "password": "P@ssW0rd32!",
+    "role": "ADMIN"
+  },
+  {
+    "id": 2,
+    "username": "user.teacher",
+    "password": "P@ssW0rd32!",
+    "role": "TEACHER"
+  },
+  {
+    "id": 3,
+    "username": "user.student",
+    "password": "P@ssW0rd32!",
+    "role": "STUDENT"
+  },
+  {
+    "id": 4,
+    "username": "user.amir",
+    "password": "P@ssW0rd32!",
+    "role": "STUDENT"
+  },
+  {
+    "id": 5,
+    "username": "user.yurson",
+    "password": "P@ssW0rd32!",
+    "role": "STUDENT"
+  },
+  {
+    "id": 6,
+    "username": "user.dhani",
+    "password": "P@ssW0rd32!",
+    "role": "STUDENT"
+  }
+]
