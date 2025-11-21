@@ -1,4 +1,4 @@
-package com.sisko.exam.config;
+package com.sisko.exam.app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

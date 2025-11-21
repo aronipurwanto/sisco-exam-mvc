@@ -1,4 +1,4 @@
-package com.sisko.exam.conversion;
+package com.sisko.exam.app.conversion;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

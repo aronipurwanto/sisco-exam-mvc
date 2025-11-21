@@ -1,6 +1,6 @@
-package com.sisko.exam.config;
+package com.sisko.exam.app.config;
 
-import com.sisko.exam.conversion.DateFormatter;
+import com.sisko.exam.app.conversion.DateFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
