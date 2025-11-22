@@ -16,12 +16,12 @@ public class HomeController {
     public String dashboard(Authentication authentication){
         if (authentication != null) {
             for (GrantedAuthority authority : authentication.getAuthorities()) {
-                String role = authority.getAuthority().toLowerCase();
-                if ("student".contains(role)) {
+                String role = authority.getAuthority().toUpperCase();
+                if ("ROLE_STUDENT".equals(role)) {
                     return "redirect:/students/dashboard";
-                } else if ("teacher".contains(role) || "subscriber".contains(role)) {
+                } else if ("ROLE_TEACHER".equals(role) || "ROLE_SUBSCRIBER".contains(role)) {
                     return "redirect:/teachers/dashboard";
-                } else if ("admin".contains(role) || "maintainer".contains(role)) {
+                } else if ("ROLE_ADMIN".contains(role) || "ROLE_MAINTAINER".contains(role)) {
                     return "redirect:/admin/dashboard";
                 }
             }
