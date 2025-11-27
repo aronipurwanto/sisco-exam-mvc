@@ -1,14 +1,14 @@
-package com.sisko.exam.master.level;
+package com.sisko.exam.master.course.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/master/levels")
-public class LevelController {
+@RequestMapping("/master/courses")
+public class CourseController {
     @GetMapping
     public String index() {
-        return "master/level/index";
+        return "master/courses/index";
     }
 }

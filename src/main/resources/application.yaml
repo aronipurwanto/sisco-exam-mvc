@@ -1,5 +1,6 @@
 spring:
   application:
+    back-end-url: http://localhost:8081/v1/api
     name: "sisko-exam-mvc"
 
 server:
