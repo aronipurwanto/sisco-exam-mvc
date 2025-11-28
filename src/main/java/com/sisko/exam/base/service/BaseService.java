@@ -12,6 +12,7 @@ import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BaseService<T, R> {
@@ -25,33 +26,33 @@ public class BaseService<T, R> {
         this.objectMapper = objectMapper;
     }
 
-    private String getToken() {
-        DefaultOidcUser user = (DefaultOidcUser) SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getPrincipal();
-
-        if (user.getIdToken() == null) {
-            return "";
-        }
-
-        return user.getIdToken().getTokenValue();
-    }
-
+//    private String getToken() {
+//        DefaultOidcUser user = (DefaultOidcUser) SecurityContextHolder.getContext()
+//                .getAuthentication()
+//                .getPrincipal();
+//
+//        if (user.getIdToken() == null) {
+//            return "";
+//        }
+//
+//        return user.getIdToken().getTokenValue();
+//    }
+//
     private HttpHeaders buildHeaders() {
-        String token = getToken();
-
-        if (token == null || token.isBlank()) {
-            throw new SiskoExamException("Token missing", HttpStatus.UNAUTHORIZED);
-        }
+//        String token = getToken();
+//
+//        if (token == null || token.isBlank()) {
+//            throw new SiskoExamException("Token missing", HttpStatus.UNAUTHORIZED);
+//        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setBearerAuth(token);
+//        headers.setBearerAuth(token);
 
         return headers;
     }
 
-    private <X> X sendRequest(String endpoint, HttpMethod method, Object body, Class<X> responseType) {
+    private Optional<T> sendRequest(String endpoint, HttpMethod method, Object body, Class<T> responseType) {
         String url = backEndUrl + endpoint;
 
         try {
@@ -62,7 +63,7 @@ public class BaseService<T, R> {
             Object rawData = response.getBody().getData();
 
             // mapping single object
-            return objectMapper.convertValue(rawData, responseType);
+            return Optional.ofNullable(objectMapper.convertValue(rawData, responseType));
 
         } catch (RestClientResponseException ex) {
             throw handleApiException(ex);
@@ -72,7 +73,7 @@ public class BaseService<T, R> {
         }
     }
 
-    private <X> List<X> sendListRequest(String endpoint, HttpMethod method, Class<X> clazz) {
+    private List<T> sendListRequest(String endpoint, HttpMethod method, Class<T> clazz) {
         String url = backEndUrl + endpoint;
 
         try {
@@ -90,7 +91,7 @@ public class BaseService<T, R> {
             throw handleApiException(ex);
 
         } catch (Exception e) {
-            throw new SiskoExamException("Unexpected error", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new SiskoExamException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -113,23 +114,31 @@ public class BaseService<T, R> {
     }
 
     // GET BY ID
-    public T getById(String id, Class<T> clazz) {
+    public Optional<T> getById(String id, Class<T> clazz) {
         return sendRequest("/" + id, HttpMethod.GET, null, clazz);
     }
 
     // POST
-    public T save(R request, Class<T> clazz) {
+    public Optional<T> save(R request, Class<T> clazz) {
         return sendRequest("", HttpMethod.POST, request, clazz);
     }
 
-    // PUT
-    public T update(String id, R request, Class<T> clazz) {
+    // PATCH
+    public Optional<T> update(String id, R request, Class<T> clazz) {
         return sendRequest("/" + id, HttpMethod.PATCH, request, clazz);
     }
 
     // DELETE
-    public T delete(String id, Class<T> clazz) {
+    public Optional<T> delete(String id, Class<T> clazz) {
         return sendRequest("/" + id, HttpMethod.DELETE, null, clazz);
+    }
+
+    public List<T> getExamByCourse(String courseId, Class<T> clazz) {
+        return sendListRequest("/course/" + courseId, HttpMethod.GET, clazz);
+    }
+
+    public List<T> getExamByLevel(String levelId, Class<T> clazz) {
+        return sendListRequest("/level/" + levelId, HttpMethod.GET, clazz);
     }
 }
 

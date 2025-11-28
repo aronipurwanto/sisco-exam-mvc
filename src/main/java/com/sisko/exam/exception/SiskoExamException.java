@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 @Getter
-@Builder
 public class SiskoExamException extends RuntimeException {
     private final HttpStatus status;
     private final Map<String, List<String>> errors;
