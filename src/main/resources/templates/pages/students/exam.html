@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/student}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" th:href="@{~/vendor/libs/bs-stepper/bs-stepper.css}" />
+    <link rel="stylesheet" th:href="@{~/vendor/libs/bootstrap-select/bootstrap-select.css}" />
+    <link rel="stylesheet" th:href="@{~/vendor/libs/select2/select2.css}" />
+    <link rel="stylesheet" th:href="@{~/vendor/libs/form-validation/form-validation.css}" />
+
+    <!-- Page CSS -->
+    <!-- Helpers -->
+    <script th:src="@{~/vendor/js/helpers.js}"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script th:src="@{~/js/config.js}"></script>
+
+</head>
+<body>
+<!-- Content -->
+<div layout:fragment="content" class="container-xxl flex-grow-1 container-p-y">
+    <!-- Header -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-6">
+                <div class="user-profile-header-banner">
+                    <img th:src="@{~/img/pages/profile-banner.png}" alt="Banner image" class="rounded-top" />
+                </div>
+                <div class="user-profile-header d-flex flex-column flex-lg-row text-sm-start text-center mb-5">
+                    <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
+                        <img
+                                th:src="@{~/img/avatars/1.png}"
+                                alt="user image"
+                                class="d-block h-auto ms-0 ms-sm-6 rounded user-profile-img" />
+                    </div>
+                    <div class="flex-grow-1 mt-3 mt-lg-5">
+                        <div
+                                class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-5 flex-md-row flex-column gap-4">
+                            <div class="user-profile-info">
+                                <h4 class="mb-2 mt-lg-6">John Doe</h4>
+                                <ul
+                                        class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-4 my-2">
+                                    <li class="list-inline-item d-flex gap-2 align-items-center">
+                                        <i class="icon-base ti tabler-palette icon-lg"></i
+                                        ><span class="fw-medium">UX Designer</span>
+                                    </li>
+                                    <li class="list-inline-item d-flex gap-2 align-items-center">
+                                        <i class="icon-base ti tabler-map-pin  icon-lg"></i
+                                        ><span class="fw-medium">Vatican City</span>
+                                    </li>
+                                    <li class="list-inline-item d-flex gap-2 align-items-center">
+                                        <i class="icon-base ti tabler-calendar  icon-lg"></i
+                                        ><span class="fw-medium"> Joined April 2021</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <a href="javascript:void(0)" class="btn btn-primary mb-1">
+                                <i class="icon-base ti tabler-user-check icon-xs me-2"></i>Connected
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ Header -->
+
+    <!-- Modern -->
+    <div class="row">
+        <div class="col-12">
+            <h5>Modern</h5>
+        </div>
+
+        <!-- Modern Vertical Wizard -->
+        <div class="col-12">
+            <small class="fw-medium">Vertical</small>
+            <div class="bs-stepper vertical wizard-modern wizard-modern-vertical mt-2">
+                <div class="bs-stepper-header">
+                    <div th:each="i : ${#numbers.sequence(1,30)}" class="step" th:attr="data-target='#question-'+${i}">
+                        <button type="button" class="step-trigger">
+                            <span class="bs-stepper-circle" th:text="${i}">1</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title" th:text="'Soal '+${i}">Soal 1</span>
+                                <span class="bs-stepper-subtitle" th:text="'Soal ' +${i}">Soal 1</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="bs-stepper-content">
+                    <form onSubmit="return false">
+                        <div th:each="i :${#numbers.sequence(1,30)}" th:attr="id='question-'+${i}" class="content">
+                            <div class="content-header mb-4">
+                                <h6 class="mb-0" th:text="'Soal '+${i}">Personal Info</h6>
+                                <small th:text="'Soal '+${i}">Enter Your Personal Info.</small>
+                            </div>
+                            <div class="row g-6">
+                                <div class="col-sm-6">
+                                    <label class="form-label" for="first-name-modern-vertical">First Name</label>
+                                    <input
+                                            type="text"
+                                            id="first-name-modern-vertical"
+                                            class="form-control"
+                                            placeholder="John" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label" for="last-name-modern-vertical">Last Name</label>
+                                    <input
+                                            type="text"
+                                            id="last-name-modern-vertical"
+                                            class="form-control"
+                                            placeholder="Doe" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label" for="country-modern-vertical">Country</label>
+                                    <select class="form-select select2" id="country-modern-vertical">
+                                        <option label=" "></option>
+                                        <option>UK</option>
+                                        <option>USA</option>
+                                        <option>Spain</option>
+                                        <option>France</option>
+                                        <option>Italy</option>
+                                        <option>Australia</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label" for="language-modern-vertical">Language</label>
+                                    <select
+                                            class="selectpicker w-auto"
+                                            id="language-modern-vertical"
+                                            data-style="btn-transparent"
+                                            data-icon-base="icon-base ti"
+                                            data-tick-icon="tabler-check text-white"
+                                            multiple>
+                                        <option>English</option>
+                                        <option>French</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 d-flex justify-content-between">
+                                    <button class="btn btn-label-secondary btn-prev">
+                                        <i class="icon-base ti tabler-arrow-left icon-xs me-sm-2 me-0"></i>
+                                        <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                    </button>
+                                    <button class="btn btn-primary btn-next">
+                                        <span class="align-middle d-sm-inline-block d-none me-sm-2">Next</span>
+                                        <i class="icon-base ti tabler-arrow-right icon-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /Modern Vertical Wizard -->
+    </div>
+</div>
+<!-- / Content -->
+
+<th:block layout:fragment="client-script">
+    <script th:src="@{~/vendor/libs/bs-stepper/bs-stepper.js}"></script>
+    <script th:src="@{~/vendor/libs/bootstrap-select/bootstrap-select.js}"></script>
+    <script th:src="@{~/vendor/libs/select2/select2.js}"></script>
+    <script th:src="@{~/vendor/libs/form-validation/popular.js}"></script>
+    <script th:src="@{~/vendor/libs/form-validation/bootstrap5.js}"></script>
+    <script th:src="@{~/vendor/libs/form-validation/auto-focus.js}"></script>
+
+    <script th:src="@{~/js/form-exam.js}"></script>
+    <script th:src="@{~/js/form-wizard-validation.js}"></script>
+</th:block>
+</body>
+</html>

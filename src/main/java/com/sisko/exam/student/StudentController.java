@@ -13,6 +13,11 @@ public class StudentController {
         return  "redirect:/students/dashboard";
     }
 
+    @GetMapping("/exam")
+    public  String exam() {
+        return  "pages/students/exam";
+    }
+
     @GetMapping("/billing")
     public String billing(){
         return "pages/students/billing";
